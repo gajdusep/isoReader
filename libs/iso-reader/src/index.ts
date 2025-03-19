@@ -1,1 +1,1 @@
-export * from './iso-reader';
+export * from './isoReader';

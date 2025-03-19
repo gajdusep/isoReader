@@ -1,8 +1,6 @@
-
-
 const BOX_TYPES_CONTAINING_BOXES = ['MOOF', 'TRAF']
 
-export const processIso = (arrayBuffer: ArrayBuffer): void => {
+export const processIsoArrayBuffer = (arrayBuffer: ArrayBuffer): void => {
   const dataView = new DataView(arrayBuffer);
   const uInt8Array = new Uint8Array(arrayBuffer);
   const textDecoder = new TextDecoder();
@@ -24,6 +22,10 @@ export const processIso = (arrayBuffer: ArrayBuffer): void => {
 
     const boxLength = dataView.getUint32(item.offset);
     const boxType = (textDecoder.decode(uInt8Array.subarray(item.offset + 4, item.offset + 8))).toUpperCase();
+
+    if (boxLength < 8) {
+      throw new Error(`Box length is too small: ${boxLength}`);
+    }
 
     console.log(`Found box of type **${boxType}** and size ${boxLength}`);
 

@@ -1,0 +1,19 @@
+{
+  "name": "iso-reader",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/iso-reader/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/iso-reader",
+        "main": "libs/iso-reader/src/index.ts",
+        "tsConfig": "libs/iso-reader/tsconfig.lib.json",
+        "assets": ["libs/iso-reader/*.md"]
+      }
+    }
+  }
+}

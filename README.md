@@ -4,6 +4,8 @@ A coding challenge for castLabs
 
 ## How to run
 
+*Tested on a Windows device*
+
 In the root of the project run:
 
 ```bash

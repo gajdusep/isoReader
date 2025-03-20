@@ -2,26 +2,9 @@
 import { useState } from 'react';
 import styles from './page.module.css';
 
+import { parseImages } from './pageService';
+
 import { processIsoArrayBuffer } from 'iso-reader';
-
-const parseImages = (mdatContent: string): Array<string> => {
-  const smpteRegex = /<smpte:image.*>([.\s\S]*?)<\/smpte:image>/g;
-  const images = mdatContent.match(smpteRegex);
-  if (!images) {
-    return [];
-  }
-  console.log(images.length)
-
-  const imageBase64s = [];
-  for (const image of images) {
-    const imageSplit = image.split('\n');
-    const imageBase64 = imageSplit[1];
-    imageBase64s.push(imageBase64);
-  }
-
-  return imageBase64s;
-}
-
 
 export default function Index() {
   const [images, setImages] = useState<Array<string>>([]);

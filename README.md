@@ -11,7 +11,7 @@ npm install
 npx nx run iso-reader-demo:dev
 ```
 
-Go to the localhost listed in the output.
+Go to the localhost listed in the console output.
 
 ## How to test
 
@@ -29,7 +29,14 @@ As iso reader is a reusable library, I started by creating a package. I wanted t
 
 Eventually, not to lose too much time, I went with NX monorepo, that on one hand has a lot of boilerplate code, but on the other hand provides import/export functionality out of the box.
 
+**Note:** I know the NX monorepo is a horendous overkill (it takes a few hundred MBs after npm install). I went for it after some frustration with simpler options.
+
 ### ISO reader
+
+The ISO reader works on the "first in, last out" principle. It pushes the box information to the stack and then tries to split it into smaller boxes if possible. It pushes just the offset and length, not the actual contents of the boxes.
+
+- See the algorithm here: [isoReader.ts](./libs/iso-reader/src/isoReader.ts)
+- And demo app page here: [page.tsx](./apps/iso-reader-demo/src/app/page.tsx)
 
 
 Edge cases and code-style details that I considered but decided not to implement for sake of simplicity:
@@ -43,5 +50,4 @@ Edge cases and code-style details that I considered but decided not to implement
 I was curious what was in the images. The fastest way was to parse it with regex. 
 This wouldn't be sustainable long-term: for example, the format might change or the file might be too large. It would be better to use some xml parsing library.
 
-
-
+**Note**: the `parseImage` method is not very robust, since it expects the images to be in a specific format. I decided to not test this method, since the format would need to be specified.
